@@ -1,7 +1,8 @@
 import React, { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { gql } from '@apollo/client';
+import Main from './Main';
+import { gql, useApolloClient, useQuery } from '@apollo/client';
 const GET_WORLD = gql`
 query GetWorld {
   getWorld {
@@ -75,25 +76,47 @@ query GetWorld {
 
 function App() {
   const [username, setUsername] = useState("")
-  useEffect(() => {
-    let pseudo= pseudodefault();
-  setUsername(pseudo)}, [])
-  
-  return (
-    <input type="text" value={username} onChange={onUserNameChanged} />
-  );
+  const client = useApolloClient();
 
-function onUserNameChanged(username: ChangeEvent<HTMLInputElement>){
-  setUsername(username.target.value)
-  localStorage.setItem("pseudo", username.target.value);
-  console.log(username.target.value)
-}
-function pseudodefault(): string{
+
+  const { loading, error, data, refetch } = useQuery(GET_WORLD, {
+    context: { headers: { "x-user": username } }
+  });
+
+  useEffect(() => {
+    let pseudo = pseudodefault();
+    setUsername(pseudo)
+  }, [])
+
+  let corps = undefined
+  if (loading) corps = <div> Loading... </div>
+  else if (error) corps = <div> Erreur de chargement du monde ! </div>
+  else corps = <div> {data.getWorld.name} <Main loadworld={data.getWorld} username={username} /></div> 
+  return (
+    <div>
+      <div> Your ID :</div>
+      <input type="text" value={username} onChange={onUserNameChanged} />
+     {corps} 
+     
+    </div>
+   
+  )
+  
+  function onUserNameChanged(username: ChangeEvent<HTMLInputElement>) {
+    setUsername(username.target.value)
+    localStorage.setItem("pseudo", username.target.value);
+    console.log(username.target.value)
+    client.resetStore()
+  }
+  
+  function pseudodefault(): string {
     let pseudo = localStorage.getItem("pseudo")
-    if (pseudo == null ) {
-      pseudo = "Pilote"+ Math.floor(Math.random() * 1000)
+    if (pseudo == null) {
+      pseudo = "Pilote" + Math.floor(Math.random() * 1000)
       localStorage.setItem("pseudo", pseudo);
+      client.resetStore()
     }
     return pseudo
-}}
+  }
+}
 export default App;
