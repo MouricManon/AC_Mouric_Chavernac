@@ -17,7 +17,7 @@ module.exports = {
             "revenu": 1,
             "vitesse": 500,
             "quantite": 1,
-            "timeleft": 0.5,
+            "timeleft": 1,
             "managerUnlocked": false,
             "palliers": [
                 {
@@ -27,7 +27,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 },
                 {
                     "name": "Amélioration du couple",
@@ -36,7 +36,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 }
                 //Rajouter les autres paliers
             ]
@@ -48,7 +48,7 @@ module.exports = {
             "cout": 60,
             "croissance": 1.15,
             "revenu": 60,
-            "vitesse": 500,
+            "vitesse": 3,
             "quantite": 1,
             "timeleft": 3,
             "managerUnlocked": false,
@@ -60,7 +60,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 }
             ]
         },
@@ -71,9 +71,9 @@ module.exports = {
             "cout": 720,
             "croissance": 1.14,
             "revenu": 540,
-            "vitesse": 500,
+            "vitesse": 6,
             "quantite": 1,
-            "timeleft": 6,
+            "timeleft": 500,
             "managerUnlocked": false,
             "palliers": [
                 {
@@ -83,7 +83,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 }
             ]
         },
@@ -94,7 +94,7 @@ module.exports = {
             "cout": 8640,
             "croissance": 1.13,
             "revenu": 4320,
-            "vitesse": 500,
+            "vitesse": 12,
             "quantite": 1,
             "timeleft": 12,
             "managerUnlocked": false,
@@ -106,7 +106,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 }
             ]
         },
@@ -129,7 +129,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 }
             ]
         },
@@ -152,7 +152,7 @@ module.exports = {
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
-                    "unlocked": "false"
+                    "unlocked": false
                 }
             ]
         }
@@ -165,7 +165,7 @@ module.exports = {
             "idcible": 0,
             "ratio": 2,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
     ],
     "upgrades": [
@@ -176,7 +176,7 @@ module.exports = {
             "idcible": 1,
             "ratio": 3,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
     ],
     "angelupgrades": [
@@ -187,7 +187,7 @@ module.exports = {
             "idcible": 0,
             "ratio": 3,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
     ],
     "managers": [
@@ -198,7 +198,7 @@ module.exports = {
             "idcible": 1,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Wangari Maathai",
@@ -207,7 +207,7 @@ module.exports = {
             "idcible": 2,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Wangari Maathai",
@@ -216,7 +216,7 @@ module.exports = {
             "idcible": 3,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Wangari Maathai",
@@ -225,7 +225,7 @@ module.exports = {
             "idcible": 4,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Wangari Maathai",
@@ -234,7 +234,7 @@ module.exports = {
             "idcible": 5,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         },
         {
             "name": "Wangari Maathai",
@@ -243,7 +243,7 @@ module.exports = {
             "idcible": 6,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": "false"
+            "unlocked": false
         }
     ]
 };
