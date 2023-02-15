@@ -1,47 +1,42 @@
-
 export class World {
-    name : string = ""
-    logo : string = ""
+    name: string = ""
+    logo: string = ""
     money: number = 0
     score: number = 0
     totalangels: number = 0
     activeangels: number = 0
     angelbonus: number = 0
     lastupdate: string = ""
-    products : { "product": Product[] };
-    allunlocks: { "pallier": Pallier[]};
-    upgrades: { "pallier": Pallier[]};
-    angelupgrades: { "pallier": Pallier[]};
-    managers: { "pallier": Pallier[]};
-
+    products: Product[]
+    allunlocks: Pallier[]
+    upgrades: Pallier[]
+    angelupgrades: Pallier[]
+    managers: Pallier[]
     constructor() {
-        this.products = { "product":[ ] } ;
-        this.managers = { "pallier":[ ] };
-        this.upgrades = { "pallier":[ ] };
-        this.angelupgrades = { "pallier":[ ] };
-        this.allunlocks = { "pallier":[ ] };
+        this.products = []
+        this.managers = []
+        this.upgrades = []
+        this.angelupgrades = []
+        this.allunlocks = []
     }
 }
-
 export class Product {
-    id : number = 0
-    name : string = ""
-    logo : string = ""
-    cout : number = 0
+    id: number = 0
+    name: string = ""
+    logo: string = ""
+    cout: number = 0
     croissance: number = 0
     revenu: number = 0
     vitesse: number = 0
     quantite: number = 0
     timeleft: number = 0
+    lastupdate: number = 0
     managerUnlocked: boolean = false
-    palliers : { "pallier" : Pallier[]};
-
+    palliers: Pallier[]
     constructor() {
-        this.palliers = { "pallier": [] }
-
+        this.palliers = []
     }
 }
-
 export class Pallier {
     name: string = ""
     logo: string = ""

@@ -2,6 +2,7 @@ import React, { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'rea
 import logo from './logo.svg';
 import './App.css';
 import Main from './Main';
+import {transform} from "./utils";
 import { gql, useApolloClient, useQuery } from '@apollo/client';
 const GET_WORLD = gql`
 query GetWorld {
@@ -91,13 +92,14 @@ function App() {
   let corps = undefined
   if (loading) corps = <div> Loading... </div>
   else if (error) corps = <div> Erreur de chargement du monde ! </div>
-  else corps = <div> {data.getWorld.name} <Main loadworld={data.getWorld} username={username} /></div> 
+  else corps = <Main loadworld={data.getWorld} username={username} />
   return (
+   
     <div>
       <div> Your ID :</div>
       <input type="text" value={username} onChange={onUserNameChanged} />
      {corps} 
-     
+      
     </div>
    
   )
