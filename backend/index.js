@@ -1,3 +1,5 @@
+const fs = require('fs').promises;
+
 async function readUserWorld(user) {
     try {
         const data = await fs.readFile("userworlds/" + user + "-world.json");
