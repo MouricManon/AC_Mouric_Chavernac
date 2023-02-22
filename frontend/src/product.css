@@ -12,3 +12,14 @@
     position: absolute;
     bottom: -10px;
 }
+
+.temps {
+    border: solid;
+    width: 50px;
+}
+
+.ligne {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
