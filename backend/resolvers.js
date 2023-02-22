@@ -1,3 +1,5 @@
+let world = require("./world")
+
 function saveWorld(context) {
     const fs = require('fs');
     fs.writeFile("userworlds/" + context.user + "-world.json",
@@ -16,16 +18,15 @@ function calculerRevenue(context) {
     let now = Date.now()
     let elapsed = now - context.world.lastupdate
     context.world.products.forEach(p => {
-        //Ceux qui ont un manager
+        //Ceux qui n'ont pas de manager
         if (!p.managerUnlocked) {
             console.log("Le produit ", p.name, " n'a pas de manager")
             //Le temps écoulé est assez grand donc la production est fini
             if (p.timeleft > 0 && p.timeleft < elapsed) {
                 console.log("Le produit ", p.name, " a réussi à créer un exemplaire")
                 p.timeleft = 0
-                //p.quantite += 1
                 //j'ajoute l'argent
-                context.world.money += p.revenu * p.quantite
+                context.world.money += p.revenu * p.quantite * (1 + context.world.activeangels * context.world.angelbonus / 100)
             } else {
                 //le temps écoulé n'est pas assez grand pour finir la production, on met à jour le temps restant
                 if (p.timeleft > 0) {
@@ -39,7 +40,7 @@ function calculerRevenue(context) {
             let nb = Math.floor(elapsed / p.vitesse)
             console.log("Le produit ", p.name, " a produit ", nb, " exemplaires")
             p.timeleft = p.vitesse - (elapsed % p.vitesse)
-            context.world.money += p.revenu * p.quantite * nb
+            context.world.money += p.revenu * p.quantite * nb * (1 + context.world.activeangels * context.world.angelbonus / 100)
         }
     })
     context.world.score += context.world.money - scoreTemp
@@ -64,7 +65,37 @@ function unlockSeuil(context, args) {
             }
         }
     })
-    //TODO les paliers commun à tous les produits
+    //les paliers commun à tous les produits
+    //Je parcours tous les paliers et pour chaque je récupère le seuil et parcoure tous les produits sauf celui en amélioration, et j'utilise un drapeau
+    let drap = true
+    context.world.allunlocks.forEach(p => {
+        if ((!p.unlocked) && (drap)) {
+            context.world.products.forEach(prod => {
+                if (prod.id !== produit.id) {
+                    if (prod.quantite < p.seuil) {
+                        drap = false
+                    }
+                }
+            })
+            if ((drap) && (produit.quantite + args.quantite >= p.seuil)) {
+                p.unlocked = true
+                //Le bonus est appliqué à tous les produits
+                context.world.products.forEach(prod => {
+                    switch (p.typeratio) {
+                        case "vitesse":
+                            prod.vitesse /= p.ratio
+                            break
+                        case "gain":
+                            prod.revenu *= p.ratio
+                            break
+                        case "ange":
+                            context.world.angelbonus += p.ratio
+                            break
+                    }
+                })
+            }
+        }
+    })
 }
 
 module.exports = {
@@ -141,19 +172,36 @@ module.exports = {
         },
 
         resetWorld(parent, args, context) {
-            //TODO
             calculerRevenue(context)
-            let world = context.world
-            let ajout= 150 * Math.sqrt(world.score / Math.pow(10, 15)) - world.totalangels
-            world.totalangels+=ajout
-            world.activeangels+=ajout
+            let ajout = 150 * Math.sqrt(world.score / Math.pow(10, 15)) - world.totalangels
+            context.world.totalangels += ajout
+            context.world.activeangels += ajout
+
+            //On réinitialise le monde
+            let activeangels = context.world.activeangels
+            context.world = world
+            context.world.activeangels = activeangels
             saveWorld(context)
+            console.log(context.world.activeangels)
             return (context.world)
+        },
 
-
+        acheterAngelUpgrade(parent, args, context) {
+            calculerRevenue(context)
+            let angelUpgrade = context.world.angelupgrades.find(u => u.name === args.name)
+            angelUpgrade.unlocked = true
+            context.world.activeangels -= angelUpgrade.seuil
+            switch (angelUpgrade.typeratio) {
+                case "vitesse":
+                    context.world.products.forEach(p => p.vitesse /= angelUpgrade.ratio)
+                    break
+                case "gain":
+                    context.world.products.forEach(p => p.revenu *= angelUpgrade.ratio)
+                    break
+                case "angel":
+                    context.world.angelbonus += angelUpgrade.ratio
+                    break
+            }
         }
-
-
     }
-
 }
