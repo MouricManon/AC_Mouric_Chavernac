@@ -95,9 +95,9 @@ function App() {
   else corps = <Main loadworld={data.getWorld} username={username} />
   return (
    
-    <div>
-      <div> Your ID :</div>
-      <input type="text" value={username} onChange={onUserNameChanged} />
+    <div >
+      <div className="joueur"><div > Your ID :</div>
+      <input type="text" value={username} onChange={onUserNameChanged} /></div>
      {corps} 
       
     </div>
