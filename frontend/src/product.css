@@ -1,0 +1,58 @@
+.round {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    margin-top: 1vw;
+}
+
+.temps {
+    border: solid;
+    border-color: rgb(167, 167, 167);
+    display: flex;
+    width: 6vw;
+    justify-content: center;
+    border-radius: 0.4vw;
+    padding-left: 0.6vw;
+    padding-right: 0.6vw;
+}
+
+.aproduct {
+    flex-direction: column;
+    display: flex;
+    border: solid;
+    background: #e4e4e477;
+    width: 32.2vw;
+    margin-bottom: 0.5vw;
+    padding-bottom: 0.5vw;
+}
+
+.ligne1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ligne2 {
+    margin-top: 1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.lesprod {
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grise {
+    background: #ff2c2c77;
+    padding: 0.5vw;
+}
+
+.pasgrise {
+    background: #7fec7f;
+    padding: 0.5vw;
+}

@@ -1,0 +1,43 @@
+.presentation {
+    display: flex;
+    margin-top: 1vw;
+    font-weight: bold;
+    font-size: 3em;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imagepres {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    margin-top: 1vw;
+    margin-right: 1vw;
+    margin-left: -4vw;
+}
+
+.score {
+    font-weight: bold;
+    font-size: 3em;
+    color: #1d5697;
+    text-align: center;
+    margin-bottom: 2vw;
+}
+
+.comm {
+    font-weight: bold;
+    font-size: 3em;
+    color: #1d5697;
+    border: solid;
+    padding: 0.4vw;
+    margin-left: -62vw;
+}
+
+.lesdeux {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: -28vw;
+}
