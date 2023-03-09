@@ -1,0 +1,27 @@
+.modal {
+    position: fixed;
+    /* reste en place */
+    z-index: 2;
+    /* au dessus du reste */
+    width: 97.5vw;
+    /* largeur */
+    height: 80vw;
+    /* hauteur */
+    overflow: auto;
+    /* barre de scroll si besoin */
+    background-color: #9b9b9bd7;
+    /* opaque */
+    border: solid;
+    top: 5;
+    /* a 10% du haut */
+    left: 2%;
+    /* a 20% de la gauche */
+}
+
+.laCroix {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3vw;
+    width: 3vw;
+}

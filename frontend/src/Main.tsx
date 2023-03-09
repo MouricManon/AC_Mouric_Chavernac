@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Product, World } from './world'
+import { Product, World, Pallier } from './world'
 import ProductComponent from './Product'
+import Manager from './Manager';
 import {transform} from "./utils";
 import "./Main.css"
 
@@ -13,6 +14,7 @@ function Main({ loadworld, username }: MainProps) {
     const [world, setWorld] = useState(JSON.parse(JSON.stringify(loadworld)) as World)
     const [valeur, setValeur] = useState("*1");
     const [click, setClick] = useState(1);
+    const [showManagers, setShowManager] = useState(false);
 
 
         function addToScore(gain: number): void {
@@ -21,6 +23,24 @@ function Main({ loadworld, username }: MainProps) {
         }
         function buyToScore(res: number): void {
             Math.trunc(world.money -= res)
+            setWorld({...world})
+        }
+
+        function buyManagerToScore(manager:Pallier, res: number): void {
+            Math.trunc(world.money -= res)
+            world.managers.forEach(m => {
+                if(m.name === manager.name){
+                    m.unlocked = true
+                }
+            })
+        //world.activeangels += manager.angelbonus
+        //world.angelbonus += manager.angelbonus
+        //world.managers.push(manager)
+        world.products.forEach(product => {
+            if(product.id === manager.idcible){
+                product.managerUnlocked = true
+            }
+        })
             setWorld({...world})
         }
         
@@ -67,8 +87,25 @@ function Main({ loadworld, username }: MainProps) {
         setWorld(JSON.parse(JSON.stringify(loadworld)) as World)
     }, [loadworld])
 
+function showmanager(){
+    setShowManager(!showManagers)
+}
 
-    return (<div><div className="presentation"><img className="imagepres" src={"http://localhost:4000/" + world.logo} />
+function affichagemanager(): JSX.Element{
+    if(showManagers){
+
+    return(
+        <Manager money={world.money} world={loadworld} showManagers={showmanager} buyManagerToScore={buyManagerToScore}></Manager>
+    )}
+    else{
+        return(<div></div>)
+    }
+}
+
+
+    return (<div><div> <button onClick={showmanager}>Managers</button>{affichagemanager()}
+    </div>
+    <div className="presentation"><img className="imagepres" src={"http://localhost:4000/" + world.logo} />
         <span> {world.name} </span></div>
      <div className="lesdeux"> <div className="score">  <span dangerouslySetInnerHTML={{ __html: transform(Math.trunc(world.money)) }} /> $</div>
       <div className="comm"> <span onClick={achat} >{valeur}</span> </div></div>
