@@ -195,7 +195,7 @@ module.exports = {
             console.log("Le nombre d'ange actif avant " +context.world.activeangels)
             let ajout = 150 * Math.sqrt(context.world.score / Math.pow(10, 15)) - context.world.totalangels
             console.log("l'ajout est de " +ajout)
-            context.world.activeangels += ajout
+            context.world.activeangels = ajout
             context.world.totalangels += context.world.activeangels
 
 
