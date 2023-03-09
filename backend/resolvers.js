@@ -69,33 +69,50 @@ function unlockSeuil(context, args) {
     //Je parcours tous les paliers et pour chaque je récupère le seuil et parcoure tous les produits sauf celui en amélioration, et j'utilise un drapeau
     let drap = true
     context.world.allunlocks.forEach(p => {
-        if ((!p.unlocked) && (drap)) {
-            context.world.products.forEach(prod => {
-                if (prod.id !== produit.id) {
-                    if (prod.quantite < p.seuil) {
-                        drap = false
-                    }
-                }
-            })
-            if ((drap) && (produit.quantite + args.quantite >= p.seuil)) {
-                p.unlocked = true
-                //Le bonus est appliqué à tous les produits
+            if ((!p.unlocked) && (drap)) {
                 context.world.products.forEach(prod => {
-                    switch (p.typeratio) {
-                        case "vitesse":
-                            prod.vitesse /= p.ratio
-                            break
-                        case "gain":
-                            prod.revenu *= p.ratio
-                            break
-                        case "ange":
-                            context.world.angelbonus += p.ratio
-                            break
+                    if (prod.id !== produit.id) {
+                        if (prod.quantite < p.seuil) {
+                            drap = false
+                        }
                     }
                 })
+                if ((drap) && (produit.quantite + args.quantite >= p.seuil)) {
+                    p.unlocked = true
+                    //Le bonus est appliqué à tous les produits
+                    if (p.idcible === 0) {
+                        context.world.products.forEach(prod => {
+                            switch (p.typeratio) {
+                                case "vitesse":
+                                    prod.vitesse /= p.ratio
+                                    break
+                                case "gain":
+                                    prod.revenu *= p.ratio
+                                    break
+                                case "ange":
+                                    context.world.angelbonus += p.ratio
+                                    break
+                            }
+                        })
+                        //Le bonus est appliqué à un seul produit
+                    } else {
+                        let produitUnlock = context.world.products.find(produit => produit.id === p.idcible)
+                        switch (p.typeratio) {
+                            case "vitesse":
+                                produitUnlock.vitesse /= p.ratio
+                                break
+                            case "gain":
+                                produitUnlock.revenu *= p.ratio
+                                break
+                            case "ange":
+                                context.world.angelbonus += p.ratio
+                                break
+                        }
+                    }
+                }
             }
         }
-    })
+    )
 }
 
 module.exports = {
@@ -173,14 +190,23 @@ module.exports = {
 
         resetWorld(parent, args, context) {
             calculerRevenue(context)
-            let ajout = 150 * Math.sqrt(world.score / Math.pow(10, 15)) - world.totalangels
-            context.world.totalangels += ajout
+            console.log("le score est de :" + context.world.score)
+            console.log("Le nombre d'ange total avant : " + context.world.totalangels)
+            console.log("Le nombre d'ange actif avant " +context.world.activeangels)
+            let ajout = 150 * Math.sqrt(context.world.score / Math.pow(10, 15)) - context.world.totalangels
+            console.log("l'ajout est de " +ajout)
             context.world.activeangels += ajout
+            context.world.totalangels += context.world.activeangels
+
 
             //On réinitialise le monde
-            let activeangels = context.world.activeangels
+            let activeangels = parseInt(context.world.activeangels)
+            let score = context.world.score
+            let totalangels=parseInt(context.world.totalangels)
             context.world = world
             context.world.activeangels = activeangels
+            context.world.score=score
+            context.world.totalangels=totalangels
             saveWorld(context)
             console.log(context.world.activeangels)
             return (context.world)

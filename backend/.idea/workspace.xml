@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21709b5e-879c-4d5c-b42f-bd36acb28fa4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resolvers.js" beforeDir="false" afterPath="$PROJECT_DIR$/resolvers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userworlds/Flo-world.json" beforeDir="false" afterPath="$PROJECT_DIR$/userworlds/Flo-world.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Product.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +40,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.13.0&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.13.0&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/GItHubDesktop/AC_Mouric_Chavernac/backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Desktop/mimi&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -157,7 +161,12 @@
       <workItem from="1676651106815" duration="963000" />
       <workItem from="1676831915808" duration="88000" />
       <workItem from="1676889558604" duration="16000" />
-      <workItem from="1677050234031" duration="6175000" />
+      <workItem from="1677050234031" duration="6490000" />
+      <workItem from="1677059421863" duration="54000" />
+      <workItem from="1678095358669" duration="7478000" />
+      <workItem from="1678177655754" duration="2237000" />
+      <workItem from="1678196637538" duration="56000" />
+      <workItem from="1678279806718" duration="14000" />
     </task>
     <task id="LOCAL-00001" summary="Amélioration du serveur">
       <created>1676651605203</created>
@@ -177,7 +186,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Florian" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
