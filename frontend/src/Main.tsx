@@ -4,6 +4,7 @@ import ProductComponent from './Product'
 import Manager from './Manager';
 import {transform} from "./utils";
 import "./Main.css"
+import { Badge } from '@material-ui/core';
 
 type MainProps = {
     loadworld: World
@@ -39,6 +40,7 @@ function Main({ loadworld, username }: MainProps) {
         world.products.forEach(product => {
             if(product.id === manager.idcible){
                 product.managerUnlocked = true
+                Math.trunc(world.money -= product.revenu*product.quantite)
             }
         })
             setWorld({...world})
@@ -95,7 +97,7 @@ function affichagemanager(): JSX.Element{
     if(showManagers){
 
     return(
-        <Manager money={world.money} world={loadworld} showManagers={showmanager} buyManagerToScore={buyManagerToScore}></Manager>
+        <Manager money={world.money} world={world} showManagers={showmanager} buyManagerToScore={buyManagerToScore}></Manager>
     )}
     else{
         return(<div></div>)
@@ -103,10 +105,11 @@ function affichagemanager(): JSX.Element{
 }
 
 
-    return (<div><div> <button onClick={showmanager}>Managers</button>{affichagemanager()}
+    return (<div><div><Badge badgeContent={world.managers.filter( manager => !manager.unlocked && world.money>manager.seuil).length} color="primary"> <button  className="leboutonm" onClick={showmanager}>Managers</button>{affichagemanager()}</Badge>
     </div>
-    <div className="presentation"><img className="imagepres" src={"http://localhost:4000/" + world.logo} />
-        <span> {world.name} </span></div>
+    
+    <div className="presentation"><div ><img  className="imagepres"src={"http://localhost:4000/" + world.logo}/> </div>
+     <div className="nompres">  <span> {world.name} </span></div></div>
      <div className="lesdeux"> <div className="score">  <span dangerouslySetInnerHTML={{ __html: transform(Math.trunc(world.money)) }} /> $</div>
       <div className="comm"> <span onClick={achat} >{valeur}</span> </div></div>
         <div className='lesprod'> 

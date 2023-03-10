@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Manager.css"
 import { World, Pallier } from './world'
-
+import { Snackbar } from '@material-ui/core';
 
 type ManagerProps = {
     world: World
@@ -10,25 +10,29 @@ type ManagerProps = {
     buyManagerToScore: (manager:Pallier,res: number)=>void
     }
 function Manager(this: any, { world, money, showManagers,buyManagerToScore} : ManagerProps){
-    return(<div className="modal"><div>
+    const[open, setOpen] = useState(false);
+    return(<div className="modal">
+      
     <h1 className="title">Managers make you feel better !</h1>
+    <div className="allmanagers">{world.managers.filter( manager => !manager.unlocked).map(manager =><div className="amanager" key={manager.idcible}>
+    <img alt="manager logo" className="managerimage" src={"http://localhost:4000/"+ manager.logo }/> 
+    <div className="nameandproduct">
+    <div className="name"> { manager.name} </div>
+    <div className="product"> {nomProduitOfManager(manager)}</div>
     </div>
-    <div>{world.managers.filter( manager => !manager.unlocked).map(manager =><div key={manager.idcible} className="managergrid">
-    <div className="logo">
-    <img alt="manager logo" className="round" src={"http://localhost:4000/"+ manager.logo }/>
-    </div>
-    <div>
-    <div className="infosmanager">
-    <div className="managername"> { manager.name} </div>
-    <div className="managercible"> { manager.idcible}</div>
-    <div className="managercost"> { manager.seuil} </div>
-    </div> </div> 
-    <div onClick= {()=>hireManager(manager)}>  
-    <button disabled={money < manager.seuil}>
-    Hire !</button></div>
-    <div>
-    <img onClick={fermermanager} src={"http://localhost:4000/icones/croix.png"} className="laCroix"/></div>
-</div>)} </div>
+    <div className="managercost"> Prix : { manager.seuil}$  </div> 
+   
+    <div  onClick= {()=>hireManager(manager)}>  
+    <button className="embaucher" disabled={money < manager.seuil}>
+    Hire !</button>
+    <Snackbar
+        message={"Le manager a été embauché !"}
+        open={open}
+        onClose={() => setOpen(false)}
+        autoHideDuration={2000}
+      /></div> </div> 
+      )}</div>
+    <img onClick={fermermanager} src={"http://localhost:4000/icones/croix.png"} className="laCroix"/>
 </div>)
 function fermermanager(){
   showManagers()
@@ -37,7 +41,16 @@ function fermermanager(){
 function hireManager(manager : Pallier){
     if(money >= manager.seuil){
         buyManagerToScore(manager,manager.seuil)
+        setOpen(true)
     }
 }
+function nomProduitOfManager(manager : Pallier){
+    let nomProduit =""
+    world.products.forEach(product => {
+        if(product.id === manager.idcible){
+            nomProduit = product.name        }
+    })
+    return nomProduit
+    }
 }
  export default Manager;

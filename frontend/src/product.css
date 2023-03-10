@@ -48,11 +48,13 @@
 }
 
 .grise {
+    border-radius: 10%;
     background: #ff2c2c77;
     padding: 0.5vw;
 }
 
 .pasgrise {
+    border-radius: 10%;
     background: #7fec7f;
     padding: 0.5vw;
 }
