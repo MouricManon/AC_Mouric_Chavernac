@@ -10,7 +10,7 @@ module.exports = {
     "products": [
         {
             "id": 1,
-            "name": "4L",
+            "name": "Renault 4L",
             "logo": "icones/Renault 4L.jpg",
             "cout": 4,
             "croissance": 1.07,
@@ -42,7 +42,7 @@ module.exports = {
         },
         {
             "id": 2,
-            "name": "Twingo",
+            "name": "Renault Twingo",
             "logo": "icones/Renault_Twingo.jpg",
             "cout": 60,
             "croissance": 1.15,
@@ -65,7 +65,7 @@ module.exports = {
         },
         {
             "id": 3,
-            "name": "peugeot 308",
+            "name": "Peugeot 308",
             "logo": "icones/Peugeot_308.jpg",
             "cout": 720,
             "croissance": 1.14,
