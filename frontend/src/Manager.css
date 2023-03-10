@@ -1,0 +1,118 @@
+    .modal {
+        position: fixed;
+        /* reste en place */
+        z-index: 2;
+        /* au dessus du reste */
+        width: 97.5vw;
+        /* largeur */
+        height: 80vw;
+        /* hauteur */
+        overflow: auto;
+        /* barre de scroll si besoin */
+        background-color: #9b9b9bd7;
+        /* opaque */
+        border: solid;
+        top: 5;
+        /* a 10% du haut */
+        left: 2%;
+        /* a 20% de la gauche */
+    }
+    
+    .laCroix {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 3vw;
+        width: 3vw;
+    }
+    
+    .managerimage {
+        width: 11.4vw;
+        height: 11.4vw;
+        border-radius: 5%;
+        margin-top: 1vw;
+        position: relative;
+        left: 2%;
+    }
+    
+    .title {
+        color: #b95757;
+        font-size: 2em;
+        font-family: 'Roboto', sans-serif;
+        position: relative;
+        right: -30%;
+    }
+    
+    .nameandproduct {
+        flex-direction: column;
+        display: flex;
+        position: relative;
+        justify-content: space-around;
+        width: 8vw;
+        left: 2%;
+    }
+    
+    .product {
+        position: absolute;
+        bottom: -2vw;
+        color: #b95757;
+        font-weight: bold;
+    }
+    
+    .name {
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    
+    .amanager {
+        flex-direction: row;
+        display: flex;
+        background: #e4e4e477;
+        width: 45vw;
+        margin-bottom: 0.5vw;
+        padding-bottom: 0.5vw;
+        align-items: center;
+        justify-content: space-around;
+        border: solid;
+        margin-bottom: 0.5vw;
+        padding-bottom: 0.5vw;
+        margin-left: 0.5vw;
+    }
+    
+    .allmanagers {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .managercost {
+        width: 13vw;
+        position: relative;
+        left: 5%;
+        font-style: italic;
+        font-weight: bold;
+    }
+    
+    .embaucher {
+        border-radius: 10%;
+        position: relative;
+        width: 8vw;
+        height: 4vw;
+        right: 10%;
+        top: 10%;
+        background-color: #a5d898;
+        color: black;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    .embaucher:disabled {
+        border-radius: 10%;
+        position: relative;
+        width: 8vw;
+        height: 4vw;
+        right: 10%;
+        top: 10%;
+        background-color: #d89898;
+        color: black;
+        font-family: 'Roboto', sans-serif;
+    }

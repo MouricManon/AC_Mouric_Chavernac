@@ -6,23 +6,33 @@
     justify-content: center;
     flex-direction: row;
     align-items: center;
+    position: relative;
+    left: -1%;
+}
+
+.nompres {
+    position: relative;
 }
 
 .imagepres {
     width: 10vw;
     height: 10vw;
-    border-radius: 50%;
+    border-radius: 100%;
     margin-top: 1vw;
     margin-right: 1vw;
     margin-left: -4vw;
 }
 
 .score {
+    position: absolute;
+    bottom: -2vw;
     font-weight: bold;
     font-size: 3em;
     color: #1d5697;
     text-align: center;
     margin-bottom: 2vw;
+    top: 0.5vw;
+    left: 7vw;
 }
 
 .comm {
@@ -31,7 +41,6 @@
     color: #1d5697;
     border: solid;
     padding: 0.4vw;
-    margin-left: -62vw;
 }
 
 .lesdeux {
@@ -39,5 +48,18 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-right: -28vw;
+    position: relative;
+    right: -35vw;
+}
+
+.leboutonm {
+    border-radius: 10%;
+    position: relative;
+    width: 12vw;
+    height: 3vw;
+    right: -30%;
+    top: 40%;
+    background-color: #3185e6;
+    color: black;
+    font-family: 'Roboto', sans-serif;
 }
