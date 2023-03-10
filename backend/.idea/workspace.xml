@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21709b5e-879c-4d5c-b42f-bd36acb28fa4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resolvers.js" beforeDir="false" afterPath="$PROJECT_DIR$/resolvers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userworlds/Flo-world.json" beforeDir="false" afterPath="$PROJECT_DIR$/userworlds/Flo-world.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/Product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Product.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icones/Sebastien_Loeb.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icones/Siege_Baquet_4L.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userworlds/-world.json" beforeDir="false" afterPath="$PROJECT_DIR$/userworlds/-world.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,6 +168,7 @@
       <workItem from="1678177655754" duration="2237000" />
       <workItem from="1678196637538" duration="56000" />
       <workItem from="1678279806718" duration="14000" />
+      <workItem from="1678456919926" duration="4000" />
     </task>
     <task id="LOCAL-00001" summary="Amélioration du serveur">
       <created>1676651605203</created>
