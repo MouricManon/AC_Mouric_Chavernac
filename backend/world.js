@@ -19,9 +19,9 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
-                    "name": "Modifcation de l'échappement",
+                    "name": "Modification de l'échappement",
                     "logo": "icones/Echappement_4L.jpg",
                     "seuil": 20,
                     "idcible": 1,
@@ -51,7 +51,7 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Peinture rapide",
                     "logo": "icones/Peinture_rapide.jpg",
@@ -74,7 +74,7 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Blower",
                     "logo": "icones/Blower.jpg",
@@ -97,7 +97,7 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Changement de jantes",
                     "logo": "icones/Jante_Qashqai.jpg",
@@ -120,7 +120,7 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Extension de palette",
                     "logo": "icones/Palette_A110.jpg",
@@ -143,7 +143,7 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Pack carbonne",
                     "logo": "icones/Pack_Carbonne.jpg",

@@ -49,7 +49,7 @@ function calculerRevenue(context) {
 
 function unlockSeuil(context, args) {
     let produit = context.world.products.find(p => p.id === args.id)
-    produit.palliers.forEach(p => {
+    produit.paliers.forEach(p => {
         if ((!p.unlocked) && (produit.quantite + args.quantite >= p.seuil)) {
             p.unlocked !== p.unlocked
             switch (p.typeratio) {
