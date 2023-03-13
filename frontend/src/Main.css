@@ -58,7 +58,19 @@
     width: 12vw;
     height: 3vw;
     right: -30%;
-    top: 40%;
+    top: 50%;
+    background-color: #3185e6;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+.leboutonu {
+    border-radius: 10%;
+    position: relative;
+    width: 12vw;
+    height: 3vw;
+    right: -3.5%;
+    top: 60%;
     background-color: #3185e6;
     color: black;
     font-family: 'Roboto', sans-serif;

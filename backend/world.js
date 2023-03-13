@@ -7,8 +7,7 @@ module.exports = {
     "activeangels": 0,
     "angelbonus": 2,
     "lastupdate": 0,
-    "products": [
-        {
+    "products": [{
             "id": 1,
             "name": "4L",
             "logo": "icones/Renault 4L.jpg",
@@ -19,8 +18,7 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
-                {
+            "paliers": [{
                     "name": "Modifcation de l'échappement",
                     "logo": "icones/Echappement_4L.jpg",
                     "seuil": 20,
@@ -51,17 +49,15 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
-                {
-                    "name": "Peinture rapide",
-                    "logo": "icones/Peinture_rapide.jpg",
-                    "seuil": 20,
-                    "idcible": 2,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                }
-            ]
+            "paliers": [{
+                "name": "Peinture rapide",
+                "logo": "icones/Peinture_rapide.jpg",
+                "seuil": 20,
+                "idcible": 2,
+                "ratio": 2,
+                "typeratio": "vitesse",
+                "unlocked": false
+            }]
         },
         {
             "id": 3,
@@ -74,17 +70,15 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
-                {
-                    "name": "Blower",
-                    "logo": "icones/Blower.jpg",
-                    "seuil": 20,
-                    "idcible": 3,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                }
-            ]
+            "paliers": [{
+                "name": "Blower",
+                "logo": "icones/Blower.jpg",
+                "seuil": 20,
+                "idcible": 3,
+                "ratio": 2,
+                "typeratio": "vitesse",
+                "unlocked": false
+            }]
         },
         {
             "id": 4,
@@ -97,17 +91,15 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
-                {
-                    "name": "Changement de jantes",
-                    "logo": "icones/Jante_Qashqai.jpg",
-                    "seuil": 20,
-                    "idcible": 4,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                }
-            ]
+            "paliers": [{
+                "name": "Changement de jantes",
+                "logo": "icones/Jante_Qashqai.jpg",
+                "seuil": 20,
+                "idcible": 4,
+                "ratio": 2,
+                "typeratio": "vitesse",
+                "unlocked": false
+            }]
         },
         {
             "id": 5,
@@ -120,17 +112,15 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
-                {
-                    "name": "Extension de palette",
-                    "logo": "icones/Palette_A110.jpg",
-                    "seuil": 20,
-                    "idcible": 5,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                }
-            ]
+            "paliers": [{
+                "name": "Extension de palette",
+                "logo": "icones/Palette_A110.jpg",
+                "seuil": 20,
+                "idcible": 5,
+                "ratio": 2,
+                "typeratio": "vitesse",
+                "unlocked": false
+            }]
         },
         {
             "id": 6,
@@ -143,32 +133,27 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
-                {
-                    "name": "Pack carbonne",
-                    "logo": "icones/Pack_Carbonne.jpg",
-                    "seuil": 20,
-                    "idcible": 6,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                }
-            ]
+            "paliers": [{
+                "name": "Pack carbonne",
+                "logo": "icones/Pack_Carbonne.jpg",
+                "seuil": 20,
+                "idcible": 6,
+                "ratio": 2,
+                "typeratio": "vitesse",
+                "unlocked": false
+            }]
         }
     ],
-    "allunlocks": [
-        {
-            "name": "Agrandissement du garage",
-            "logo": "icones/Grand_garage.jpg",
-            "seuil": 5,
-            "idcible": 0,
-            "ratio": 2,
-            "typeratio": "gain",
-            "unlocked": false
-        },
-    ],
-    "upgrades": [
-        {
+    "allunlocks": [{
+        "name": "Agrandissement du garage",
+        "logo": "icones/Grand_garage.jpg",
+        "seuil": 5,
+        "idcible": 0,
+        "ratio": 2,
+        "typeratio": "gain",
+        "unlocked": false
+    }, ],
+    "upgrades": [{
             "name": "Changement du moteur",
             "logo": "icones/Moteur_4L.jpg",
             "seuil": 1e3,
@@ -232,19 +217,16 @@ module.exports = {
             "unlocked": false
         },
     ],
-    "angelupgrades": [
-        {
-            "name": "Angel Sacrifice",
-            "logo": "icones/angel.png",
-            "seuil": 10,
-            "idcible": 0,
-            "ratio": 3,
-            "typeratio": "gain",
-            "unlocked": false
-        },
-    ],
-    "managers": [
-        {
+    "angelupgrades": [{
+        "name": "Angel Sacrifice",
+        "logo": "icones/angel.png",
+        "seuil": 10,
+        "idcible": 0,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    }, ],
+    "managers": [{
             "name": "Oliver Solberg",
             "logo": "icones/Oliver_Solberg.jpg",
             "seuil": 10,

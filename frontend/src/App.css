@@ -39,6 +39,7 @@
 
 .joueur {
     right: 0;
+    top: -3vw;
     position: absolute;
     margin-top: 4vw;
     margin-right: 2vw;

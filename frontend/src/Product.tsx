@@ -6,23 +6,53 @@ import "./MyProgressBar.css"
 import { transform } from "./utils";
 import { Product } from './world'
 import { time } from 'console';
+import { gql, useMutation} from '@apollo/client';
+const LANCER_PRODUCTION = gql`
+mutation lancerProductionProduit($id: Int!) {
+lancerProductionProduit(id: $id) {
+id
+}
+}`
+const ACHETER_QTE = gql`
+mutation acheterQtProduit($id: Int!,$quantite: Int!) {
+acheterQtProduit(id: $id, quantite: $quantite) {
+id
+}
+}`
 
 type ProductProps = {
     product: Product
     onProductionDone: (product: Product, nb: number) => void
     valeur: string
     money: number
+    username: string
     onAchatDone: (product: Product, res: number, iteration: number) => void
 }
 
 //hook de type ref
-function ProductComponent(this: any, { product, onProductionDone, valeur, money, onAchatDone }: ProductProps) {
+function ProductComponent(this: any, { username, product, onProductionDone, valeur, money, onAchatDone }: ProductProps) {
+    //const client = useApolloClient();
+    const [lancerProduction] = useMutation(LANCER_PRODUCTION,
+        { context: { headers: { "x-user": username }},
+        onError: (error): void => {
+        // actions en cas d'erreur
+        }
+        })
+        const [acheterQtProduit] = useMutation(ACHETER_QTE,
+            { context: { headers: { "x-user": username }},
+            onError: (error): void => {
+            // actions en cas d'erreur
+            }
+            })
+       
+        
     const lastupdate = useRef(Date.now())
     const [timeleft, setTimeleft] = useState(product.timeleft);
     const res = useRef(0);
     const iteration = useRef(0);
     const griseval = useRef(false);
     useInterval(() => calcScore(), 100);
+    
     if (grise()) {
         return (
             <div className='aproduct'>
@@ -34,7 +64,7 @@ function ProductComponent(this: any, { product, onProductionDone, valeur, money,
                 </div>
                 <div className="ligne2"><span> {product.name} </span>
                     <span> Quantité : {Math.trunc(product.quantite)} </span>
-                    <div onClick={demandeachat} className="pasgrise"> Prix :  {calc()}
+                    <div onClick={demandeachat} className="pasgrise"> Prix : {Math.round(calc()*100)/100}
                     </div>
                 </div>
             </div>)
@@ -50,7 +80,7 @@ function ProductComponent(this: any, { product, onProductionDone, valeur, money,
                 </div>
                 <div className="ligne2"><span> {product.name} </span>
                     <span> Quantité : {Math.trunc(product.quantite)} </span>
-                    <div onClick={demandeachat} className="grise"> Prix :  {calc()}
+                    <div onClick={demandeachat} className="grise"> Prix : {Math.round(calc()*100)/100}
                     </div>
                 </div>
             </div>)
@@ -58,6 +88,8 @@ function ProductComponent(this: any, { product, onProductionDone, valeur, money,
     function startFabrication() {
         if (timeleft == 0) {
             setTimeleft(product.vitesse)
+            lancerProduction({ variables: { id: product.id } });
+            
         }
         else {
             console.log("Le produit ", product.name, " est déjà en production")
@@ -112,28 +144,28 @@ function ProductComponent(this: any, { product, onProductionDone, valeur, money,
     function calcMaxProduit(): number {
         iteration.current = (Math.log10(-(money * (1 - product.croissance) / product.cout - 1)) / Math.log10(product.croissance)) - 1
         console.log(Math.trunc(iteration.current))
-        return Math.trunc(iteration.current)
+        return iteration.current
     }
     function calc(): number {
         if (valeur === "*1") {
             res.current = product.cout
-            return Math.trunc(res.current)
+            return res.current
         }
         if (valeur === "*10") {
-            res.current = product.cout * (1 - product.croissance ** 11) / (1 - product.croissance)
-            return Math.trunc(res.current)
+            res.current = product.cout * (1 - product.croissance ** 10) / (1 - product.croissance)
+            return res.current
         }
         if (valeur === "*100") {
-            res.current = product.cout * (1 - product.croissance ** 101) / (1 - product.croissance)
-            return Math.trunc(res.current)
+            res.current = product.cout * (1 - product.croissance ** 100) / (1 - product.croissance)
+            return res.current
         }
         if (valeur === "*Max") {
-            res.current = product.cout * (1 - product.croissance ** (calcMaxProduit() + 1)) / (1 - product.croissance)
-            return Math.trunc(res.current)
+            res.current = product.cout * (1 - product.croissance ** (calcMaxProduit()+1)) / (1 - product.croissance)
+            return res.current
         }
 
         else {
-            return Math.trunc(res.current)
+            return res.current
         }
 
     }
@@ -141,10 +173,26 @@ function ProductComponent(this: any, { product, onProductionDone, valeur, money,
     function demandeachat() {
         //TODO plusieurs paliers d'un coup
 
-        if (res.current <= money) {
-            console.log(money)
-            console.log(res.current)
-            onAchatDone(product, res.current, iteration.current)
+        if (res.current <= money && money>0) {
+            if (valeur === "*1") {
+            acheterQtProduit({ variables: { id: product.id, quantite:1} });
+             onAchatDone(product, res.current, 1)
+            }
+            if (valeur === "*10") {
+                acheterQtProduit({ variables: { id: product.id, quantite:10 } });
+                onAchatDone(product, res.current, 10)
+            }
+            if (valeur === "*100") {
+                acheterQtProduit({ variables: { id: product.id, quantite:100} });
+                onAchatDone(product, res.current, 100)
+            }
+            if (valeur === "*Max") {
+                acheterQtProduit({ variables: { id: product.id, quantite:calcMaxProduit()} });
+                onAchatDone(product, res.current, calcMaxProduit())
+            }
+            
+           
+           
 
         }
         else {
@@ -155,7 +203,7 @@ function ProductComponent(this: any, { product, onProductionDone, valeur, money,
     function grise(): boolean {
         //TODO plusieurs paliers d'un coup
 
-        if (res.current <= money) {
+        if (res.current <= money && money>0) {
             griseval.current = true
             return griseval.current
         }
