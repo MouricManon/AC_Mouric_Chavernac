@@ -7,8 +7,7 @@ module.exports = {
     "activeangels": 0,
     "angelbonus": 2,
     "lastupdate": 0,
-    "products": [
-        {
+    "products": [{
             "id": 1,
             "name": "Renault 4L",
             "logo": "icones/Renault 4L.jpg",
@@ -156,19 +155,16 @@ module.exports = {
             ]
         }
     ],
-    "allunlocks": [
-        {
-            "name": "Agrandissement du garage",
-            "logo": "icones/Grand_garage.jpg",
-            "seuil": 5,
-            "idcible": 0,
-            "ratio": 2,
-            "typeratio": "gain",
-            "unlocked": false
-        },
-    ],
-    "upgrades": [
-        {
+    "allunlocks": [{
+        "name": "Agrandissement du garage",
+        "logo": "icones/Grand_garage.jpg",
+        "seuil": 5,
+        "idcible": 0,
+        "ratio": 2,
+        "typeratio": "gain",
+        "unlocked": false
+    }, ],
+    "upgrades": [{
             "name": "Changement du moteur",
             "logo": "icones/Moteur_4L.jpg",
             "seuil": 1e3,
@@ -232,19 +228,16 @@ module.exports = {
             "unlocked": false
         },
     ],
-    "angelupgrades": [
-        {
-            "name": "Angel Sacrifice",
-            "logo": "icones/angel.png",
-            "seuil": 10,
-            "idcible": 0,
-            "ratio": 3,
-            "typeratio": "gain",
-            "unlocked": false
-        },
-    ],
-    "managers": [
-        {
+    "angelupgrades": [{
+        "name": "Angel Sacrifice",
+        "logo": "icones/angel.png",
+        "seuil": 10,
+        "idcible": 0,
+        "ratio": 3,
+        "typeratio": "gain",
+        "unlocked": false
+    }, ],
+    "managers": [{
             "name": "Oliver Solberg",
             "logo": "icones/Oliver_Solberg.jpg",
             "seuil": 10,

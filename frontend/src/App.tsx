@@ -76,7 +76,7 @@ query GetWorld {
 }`
 
 function App() {
-  const [username, setUsername] = useState("")
+  const [username, setUsername] = useState("Pilote750")
   const client = useApolloClient();
 
 

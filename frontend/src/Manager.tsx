@@ -2,15 +2,29 @@ import React, { useState } from 'react';
 import "./Manager.css"
 import { World, Pallier } from './world'
 import { Snackbar } from '@material-ui/core';
+import { gql, useMutation} from '@apollo/client';
 
+const ENGAGER_MANAGER = gql`
+mutation engagerManager($name: String!) {
+engagerManager(name: $name) {
+name
+}
+}`
 type ManagerProps = {
     world: World
     money : number
+    username : string
     showManagers: ()=>void
     buyManagerToScore: (manager:Pallier,res: number)=>void
     }
-function Manager(this: any, { world, money, showManagers,buyManagerToScore} : ManagerProps){
+function Manager(this: any, { username, world, money, showManagers,buyManagerToScore} : ManagerProps){
     const[open, setOpen] = useState(false);
+    const [engagerManager] = useMutation(ENGAGER_MANAGER,
+        { context: { headers: { "x-user": username }},
+        onError: (error): void => {
+        // actions en cas d'erreur
+        }
+        })
     return(<div className="modal">
       
     <h1 className="title">Managers make you feel better !</h1>
@@ -40,6 +54,7 @@ function fermermanager(){
 
 function hireManager(manager : Pallier){
     if(money >= manager.seuil){
+        engagerManager({variables: {name: manager.name}})
         buyManagerToScore(manager,manager.seuil)
         setOpen(true)
     }
