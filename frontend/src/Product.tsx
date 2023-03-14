@@ -64,7 +64,7 @@ function ProductComponent(this: any, { username, product, onProductionDone, vale
                 </div>
                 <div className="ligne2"><span> {product.name} </span>
                     <span> Quantité : {Math.trunc(product.quantite)} </span>
-                    <div onClick={demandeachat} className="pasgrise"> Prix : {Math.round(calc()*100)/100}
+                    <div onClick={demandeachat} className="pasgrise"> Prix : { <span dangerouslySetInnerHTML={{ __html: transform(Math.round(calc() * 100) / 100) }}/>}
                     </div>
                 </div>
             </div>)
@@ -80,7 +80,7 @@ function ProductComponent(this: any, { username, product, onProductionDone, vale
                 </div>
                 <div className="ligne2"><span> {product.name} </span>
                     <span> Quantité : {Math.trunc(product.quantite)} </span>
-                    <div onClick={demandeachat} className="grise"> Prix : {Math.round(calc()*100)/100}
+                    <div onClick={demandeachat} className="grise"> Prix : { <span dangerouslySetInnerHTML={{ __html: transform(Math.round(calc() * 100) / 100) }}/>}
                     </div>
                 </div>
             </div>)
@@ -132,7 +132,7 @@ function ProductComponent(this: any, { username, product, onProductionDone, vale
                 setTimeleft(timeleft - tempsecoule);
             }
             else {
-                setTimeleft(product.vitesse);
+                setTimeleft(product.vitesse-(tempsecoule-timeleft));
                 onProductionDone(product, 1);
             }
 

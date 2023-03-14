@@ -3,6 +3,7 @@ import "./Manager.css"
 import { World, Pallier } from './world'
 import { Snackbar } from '@material-ui/core';
 import { gql, useMutation} from '@apollo/client';
+import { transform } from "./utils";
 
 const ENGAGER_MANAGER = gql`
 mutation engagerManager($name: String!) {
@@ -34,13 +35,13 @@ function Manager(this: any, { username, world, money, showManagers,buyManagerToS
     <div className="name"> { manager.name} </div>
     <div className="product"> {nomProduitOfManager(manager)}</div>
     </div>
-    <div className="managercost"> Prix : { manager.seuil}$  </div> 
+    <div className="managercost"> Prix :{ <span dangerouslySetInnerHTML={{ __html: transform(Math.round(manager.seuil * 100) / 100) }}/>}$  </div> 
    
     <div  onClick= {()=>hireManager(manager)}>  
     <button className="embaucher" disabled={money < manager.seuil}>
     Hire !</button>
     <Snackbar
-        message={"Le manager a été embauché !"}
+        message={"Le manager "+manager.name +" a été embauché !"}
         open={open}
         onClose={() => setOpen(false)}
         autoHideDuration={2000}
