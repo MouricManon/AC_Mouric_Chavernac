@@ -215,7 +215,7 @@ module.exports = {
         "unlocked": false
     }, {
         "name": "Sponsoring AlpineStars",
-        "logo": "icones/Alpinestars.jpg",
+        "logo": "icones/Alpinestars.png",
         "seuil": 10,
         "idcible": 0,
         "ratio": 2,
