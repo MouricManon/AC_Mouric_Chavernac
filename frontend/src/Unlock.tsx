@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import "./Unlock.css"
 import { World, Pallier, Product } from './world'
-import { Snackbar } from '@material-ui/core';
 
-type ManagerProps = {
+
+type UnlockProps = {
     world: World
     money: number
     showUnlocks: () => void
-    buyUnlocksToScore: (unlock: Pallier, res: number) => void
 }
-function Unlock(this: any, { world, money, showUnlocks, buyUnlocksToScore }: ManagerProps) {
-    const [open, setOpen] = useState(false);
+function Unlock(this: any, { world, money, showUnlocks}: UnlockProps) {
     return (<div className="model">
     <h1 className="titre"> Unlocks restants</h1>
     <div className="allunlocks">{afficheunlock().filter( p => !p.unlocked).map(p =><div className="anunlock" key={p.idcible}>
@@ -20,14 +18,10 @@ function Unlock(this: any, { world, money, showUnlocks, buyUnlocksToScore }: Man
     <div className="productu"> {nomProduitOfUnlock(p)}</div>
     </div>
     <div className="qte"> Quantité nécessaire : { p.seuil} </div> 
-    <Snackbar
-        message={"Vous avez débloqué un unlock !"}
-        open={open}
-        onClose={() => setOpen(false)}
-        autoHideDuration={2000}
-      /></div> )} </div>
+  </div>)} </div>
     <img onClick={fermerunlock} src={"http://localhost:4000/icones/croix.png"} className="laCroix"/>
-</div>)
+</div>
+)
 
     function fermerunlock() {
         showUnlocks()
@@ -49,12 +43,6 @@ function Unlock(this: any, { world, money, showUnlocks, buyUnlocksToScore }: Man
         console.log(palliers)
         return palliers}
 
-    function hireUnlock(unlock: Pallier) {
-        if (money >= unlock.seuil) {
-            buyUnlocksToScore(unlock, unlock.seuil)
-            setOpen(true)
-        }
-    }
     function nomProduitOfUnlock(unlock: Pallier) {
         let nomProduit = ""
         world.products.forEach(product => {

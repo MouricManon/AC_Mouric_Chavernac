@@ -3,11 +3,14 @@ import { Product, World, Pallier } from './world'
 import ProductComponent from './Product'
 import Manager from './Manager';
 import Unlock from './Unlock';
+import AllUnlocks from './AllUnlocks';
+import CashUpgrade from './CashUpgrade';
 import { transform } from "./utils";
 import "./Main.css"
 import { Badge } from '@material-ui/core';
 import { gql, useMutation } from '@apollo/client';
-
+import { Snackbar } from '@material-ui/core';
+//pb dans l'ajout de l'argent apres *MAx
 type MainProps = {
     loadworld: World
     username: string
@@ -19,6 +22,10 @@ function Main({ loadworld, username }: MainProps) {
     const [click, setClick] = useState(1);
     const [showManagers, setShowManager] = useState(false);
     const [showUnlocks, setShowUnlocks] = useState(false);
+    const [showAllUnlocks, setShowAllUnlocks] = useState(false);
+    const [showUpgrade, setShowUpgrade] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState("");
 
 
     function addToScore(gain: number): void {
@@ -26,9 +33,7 @@ function Main({ loadworld, username }: MainProps) {
         setWorld({ ...world })
     }
     function buyToScore(res: number): void {
-        console.log("Moi c'est buy to score")
         world.money -= res
-        console.log("d'après moi, arpès achat, on a  " + world.money+" euros")
         //On met à jour le monde
         setWorld({ ...world })
     }
@@ -51,28 +56,30 @@ function Main({ loadworld, username }: MainProps) {
         })
         setWorld({ ...world })
     }
-
-
-    function buyUnlocksToScore(unlock: Pallier, res: number): void {
+    function buyUpgradeToScore(cash: Pallier, res: number): void {
         world.money -= res
-        /*  world.products.paliers.forEach(u => {
-              if(u.name === unlock.name){
-                  u.unlocked = true
-              }
-          })*/
-        //world.activeangels += manager.angelbonus
-        //world.angelbonus += manager.angelbonus
-        //world.managers.push(manager)
-        world.products.forEach(product => {
-            if (product.id === unlock.idcible) {
-                unlock.unlocked = true
-                world.money -= product.revenu * product.quantite
-            }
-        })
+        cash.unlocked = true  
+        world.products.forEach(p => {
+            if (p.id === cash.idcible) {
+                if (cash.typeratio === "vitesse") {
+                    p.vitesse = p.vitesse / cash.ratio
+                }
+                if (cash.typeratio === "gain") {
+                    console.log("je suis le revenu"+p.revenu)
+                    console.log("je suis le ratio"+cash.ratio)
+                    p.revenu = p.revenu * cash.ratio
+                    console.log("je suis le revenu"+p.revenu)
+                }
+                if (cash.typeratio === "ange") {
+                    world.angelbonus += cash.ratio
+                }
+            }})
         setWorld({ ...world })
     }
 
-    function onAchatDone(p: Product, res: number, iteration: number): void {
+
+
+    function onAchatDone(p: Product, res: number, iteration: number) {
         // calcul de la somme obtenue par la production du produit
         if (valeur === "*1") {
             p.cout = p.cout * p.croissance
@@ -80,6 +87,7 @@ function Main({ loadworld, username }: MainProps) {
 
 
         }
+
         if (valeur === "*10") {
             p.cout = p.cout * p.croissance ** 10
             p.quantite = p.quantite + 10
@@ -94,8 +102,49 @@ function Main({ loadworld, username }: MainProps) {
             p.quantite = p.quantite + iteration
 
         }
+        p.paliers.forEach(pallier => {
+            if (pallier.seuil <= p.quantite && pallier.unlocked == false) {
+                setOpen(true)
+                pallier.unlocked = true
+                if (pallier.typeratio === "vitesse") {
+                    p.vitesse = p.vitesse / pallier.ratio
+                }
+                if (pallier.typeratio === "gain") {
+                    p.revenu = p.revenu * pallier.ratio
+                }
+                if (pallier.typeratio === "ange") {
+                    world.angelbonus += pallier.ratio
+                }
+                setMessage(p.name + " " + pallier.typeratio + " X " + pallier.ratio)
+            }
+        })
+      
+        let drap = true
+        world.allunlocks.forEach(all => {
+            world.products.forEach(p => {
+                if (all.seuil > p.quantite || all.unlocked == true) {
+                    drap = false
+                }
+            })
+            if (drap == true) {
+                setOpen(true)
+                all.unlocked = true
+                if (all.typeratio === "vitesse") {
+                    p.vitesse = p.vitesse / all.ratio
+                }
+                if (all.typeratio === "gain") {
+                    p.revenu = p.revenu * all.ratio
+                }
+                if (all.typeratio === "ange") {
+                    world.angelbonus += all.ratio
+                }
+                setMessage("Amélioration pour tous les unlocks : " + all.typeratio + " X " + all.ratio)
+            }
+        }
+        )
         // ajout de la somme à l’argent possédé
         buyToScore(res)
+
     }
     function onProductionDone(p: Product, nb: number): void {
         // calcul de la somme obtenue par la production du produit
@@ -128,7 +177,15 @@ function Main({ loadworld, username }: MainProps) {
     }
     function showunlocks() {
         console.log(showUnlocks)
-       setShowUnlocks(!showUnlocks)
+        setShowUnlocks(!showUnlocks)
+    }
+    function showallunlocks() {
+        console.log(showAllUnlocks)
+        setShowAllUnlocks(!showAllUnlocks)
+    }
+    function showupgrade() {
+        console.log(showUpgrade)
+        setShowUpgrade(!showUpgrade)
     }
     function affichagemanager(): JSX.Element {
         if (showManagers) {
@@ -141,12 +198,48 @@ function Main({ loadworld, username }: MainProps) {
             return (<div></div>)
         }
     }
+    function affichageupgrade(): JSX.Element {
+        if (showUpgrade) {
+
+            return (
+                <CashUpgrade username={username} money={world.money} world={world} showUpgrade={showupgrade} buyUpgradeToScore={buyUpgradeToScore}></CashUpgrade>
+            )
+        }
+        else {
+            return (<div></div>)
+        }
+    }
     function affichageunlocks(): JSX.Element {
         if (showUnlocks) {
 
             return (
-                <Unlock money={world.money} world={world} showUnlocks={showunlocks} buyUnlocksToScore={buyUnlocksToScore}></Unlock>
+                <Unlock money={world.money} world={world} showUnlocks={showunlocks}></Unlock>
             )
+        }
+        else {
+            return (<div></div>)
+        }
+    }
+    function affichageallunlocks(): JSX.Element {
+        if (showAllUnlocks) {
+
+            return (
+                <AllUnlocks money={world.money} world={world} showAllUnlocks={showallunlocks} ></AllUnlocks>
+            )
+        }
+        else {
+            return (<div></div>)
+        }
+    }
+
+    function snackbar(): JSX.Element {
+        if (open) {
+            return (<Snackbar
+                message={message}
+                open={open}
+                onClose={() => setOpen(false)}
+                autoHideDuration={2000}
+            />)
         }
         else {
             return (<div></div>)
@@ -155,13 +248,21 @@ function Main({ loadworld, username }: MainProps) {
 
 
     return (<div>
+        <div className="header">
+        <div className="lesboutons">
         <div><Badge badgeContent={world.managers.filter(manager => !manager.unlocked && world.money > manager.seuil).length} color="primary"> <button className="leboutonm" onClick={showmanager}>Managers</button>{affichagemanager()}</Badge>
-    </div>
+        </div>
         <div><button className="leboutonu" onClick={showunlocks}>Unlocks</button>{affichageunlocks()}
         </div>
+        <div><button className="leboutonall" onClick={showallunlocks}>All Unlocks</button>{affichageallunlocks()}
+        </div>
+        <div><Badge badgeContent={world.upgrades.filter(cash => !cash.unlocked && world.money > cash.seuil).length} color="primary"><button className="leboutonup" onClick={showupgrade}>Upgrades</button>{affichageupgrade()} </Badge>
+        </div>
+        </div>
+        <div className="lereste">
         <div className="presentation"><div ><img className="imagepres" src={"http://localhost:4000/" + world.logo} /> </div>
-            <div className="nompres">  <span> {world.name} </span></div></div>
-        <div className="lesdeux"> <div className="score">  <span dangerouslySetInnerHTML={{ __html: transform(Math.round(world.money*100)/100) }} /> $</div>
+            <div className="nompres">  <span> {world.name} </span></div></div></div></div>
+        <div className="lesdeux"> <div className="score">  <span dangerouslySetInnerHTML={{ __html: transform(Math.round(world.money * 100) / 100) }} /> $</div>
             <div className="comm"> <span onClick={achat} >{valeur}</span> </div></div>
         <div className='lesprod'>
             <ProductComponent username={username} money={world.money} valeur={valeur} product={world.products[0]} onProductionDone={onProductionDone} onAchatDone={onAchatDone} />
@@ -170,6 +271,6 @@ function Main({ loadworld, username }: MainProps) {
             <ProductComponent username={username} money={world.money} valeur={valeur} product={world.products[3]} onProductionDone={onProductionDone} onAchatDone={onAchatDone} />
             <ProductComponent username={username} money={world.money} valeur={valeur} product={world.products[4]} onProductionDone={onProductionDone} onAchatDone={onAchatDone} />
             <ProductComponent username={username} money={world.money} valeur={valeur} product={world.products[5]} onProductionDone={onProductionDone} onAchatDone={onAchatDone} /></div>
-    </div>)
+        <div> {snackbar()}</div>  </div>)
 }
 export default Main;

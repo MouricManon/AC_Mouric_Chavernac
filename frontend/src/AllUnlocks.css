@@ -1,0 +1,80 @@
+.modul {
+    position: fixed;
+    /* reste en place */
+    z-index: 2;
+    /* au dessus du reste */
+    width: 80vw;
+    /* largeur */
+    height: 40vw;
+    /* hauteur */
+    /* barre de scroll si besoin */
+    background-color: #9b9b9bd7;
+    /* opaque */
+    border: solid;
+    top: 5;
+    /* a 10% du haut */
+    left: 10%;
+    overflow: scroll;
+    /* a 20% de la gauche */
+}
+
+.laCroix {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3vw;
+    width: 3vw;
+}
+
+.allunlockimage {
+    width: 10.4vw;
+    height: 10.4vw;
+    border-radius: 5%;
+    margin-top: 1vw;
+    position: relative;
+    left: 2%;
+}
+
+.titre1 {
+    color: #b95757;
+    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    right: -30%;
+}
+
+.nameau {
+    font-weight: bold;
+    font-size: 1em;
+    position: relative;
+    left: 1.5vw;
+}
+
+.anallunlock {
+    flex-direction: row;
+    display: flex;
+    background: #e4e4e477;
+    width: 38vw;
+    height: 12vw;
+    margin-bottom: 0.5vw;
+    padding-bottom: 0.5vw;
+    align-items: center;
+    justify-content: space-around;
+    border: solid;
+    margin-left: 1vw;
+}
+
+.allallunlocks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 49vw;
+}
+
+.quantite {
+    width: 17vw;
+    position: relative;
+    left: 5%;
+    font-style: italic;
+    font-weight: bold;
+}
