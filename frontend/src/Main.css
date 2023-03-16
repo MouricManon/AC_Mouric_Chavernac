@@ -7,7 +7,7 @@
     flex-direction: row;
     align-items: center;
     position: relative;
-    left: -1%;
+    left: 35%;
 }
 
 .nompres {
@@ -50,6 +50,7 @@
     align-items: center;
     position: relative;
     right: -35vw;
+    margin-top: -2vw;
 }
 
 .leboutonm {
@@ -99,12 +100,38 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.leboutonaup {
+    border-radius: 10%;
+    position: relative;
+    width: 12vw;
+    height: 3vw;
+    right: -3.5%;
+    top: 60%;
+    background-color: #3185e6;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+.leboutonange {
+    border-radius: 10%;
+    position: relative;
+    width: 12vw;
+    height: 3vw;
+    right: -3.5%;
+    top: 60%;
+    background-color: #3185e6;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
 .header {
     flex-direction: row;
     display: flex;
     position: relative;
     justify-content: space-around;
     left: 2%;
+    width: 80vw;
+    margin-top: 2vw;
 }
 
 .lereste {

@@ -6,8 +6,8 @@ import { gql, useMutation} from '@apollo/client';
 import { transform } from "./utils";
 
 const CASHUPGRADE = gql`
-mutation engagerManager($name: String!) {
-engagerManager(name: $name) {
+mutation acheterCashUpgrade($name: String!) {
+acheterCashUpgrade(name: $name) {
 name
 }
 }`

@@ -1,0 +1,79 @@
+.modale3 {
+    position: fixed;
+    /* reste en place */
+    z-index: 2;
+    /* au dessus du reste */
+    width: 80vw;
+    /* largeur */
+    height: 40vw;
+    /* hauteur */
+    /* barre de scroll si besoin */
+    background-color: #9b9b9bd7;
+    /* opaque */
+    border: solid;
+    top: 5;
+    /* a 10% du haut */
+    left: 10%;
+    overflow: scroll;
+}
+
+.laCroix {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3vw;
+    width: 3vw;
+}
+
+.angeimage {
+    width: 20vw;
+    height: 20vw;
+    border-radius: 5%;
+    margin-top: 1vw;
+    position: relative;
+}
+
+.title1 {
+    color: #b95757;
+    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    right: -30%;
+}
+
+.reset {
+    border-radius: 10%;
+    position: absolute;
+    width: 8vw;
+    height: 4vw;
+    right: 10%;
+    top: 10%;
+    background-color: #a5d898;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+.reset:disabled {
+    border-radius: 10%;
+    position: absolute;
+    width: 8vw;
+    height: 4vw;
+    right: 10%;
+    top: 10%;
+    background-color: #d89898;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+.nbAngesActifs {
+    position: absolute;
+    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.nbAngesrecoltes {
+    position: absolute;
+    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+    right: 2%;
+}
