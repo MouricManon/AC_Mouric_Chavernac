@@ -25,7 +25,7 @@ module.exports = {
                 "seuil": 20,
                 "idcible": 1,
                 "ratio": 2,
-                "typeratio": "vitesse",
+                "typeratio": "gain",
                 "unlocked": false
             },
             {
@@ -34,7 +34,7 @@ module.exports = {
                 "seuil": 50,
                 "idcible": 1,
                 "ratio": 2,
-                "typeratio": "vitesse",
+                "typeratio": "gain",
                 "unlocked": false
             }, {
                 "name": "200 000 km",
@@ -42,7 +42,7 @@ module.exports = {
                 "seuil": 75,
                 "idcible": 1,
                 "ratio": 2,
-                "typeratio": "vitesse",
+                "typeratio": "gain",
                 "unlocked": false
             }
         ]
@@ -237,7 +237,7 @@ module.exports = {
         "seuil": 50,
         "idcible": 0,
         "ratio": 4,
-        "typeratio": "vitesse",
+        "typeratio": "ange",
         "unlocked": false
     }, {
         "name": "Optimisation de la chaîne de production",
@@ -245,7 +245,7 @@ module.exports = {
         "seuil": 100,
         "idcible": 0,
         "ratio": 2,
-        "typeratio": "vitesse",
+        "typeratio": "ange",
         "unlocked": false
     },
     ],
