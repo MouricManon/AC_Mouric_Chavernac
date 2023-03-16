@@ -5,6 +5,8 @@ import Manager from './Manager';
 import Unlock from './Unlock';
 import AllUnlocks from './AllUnlocks';
 import CashUpgrade from './CashUpgrade';
+import AngelsUpgrades from './AngelsUpgrades';
+import Anges from './Anges';
 import { transform } from "./utils";
 import "./Main.css"
 import { Badge } from '@material-ui/core';
@@ -24,12 +26,15 @@ function Main({ loadworld, username }: MainProps) {
     const [showUnlocks, setShowUnlocks] = useState(false);
     const [showAllUnlocks, setShowAllUnlocks] = useState(false);
     const [showUpgrade, setShowUpgrade] = useState(false);
+    const [showAngels, setShowAngels] = useState(false);
+    const [showAngelsUpgrade, setShowAngelsUpgrade] = useState(false);
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState("");
 
 
     function addToScore(gain: number): void {
-        world.money += gain
+        world.money = world.money+ (gain*(1+world.activeangels*world.angelbonus/100))
+        world.score= world.score+ (gain*(1+world.activeangels*world.angelbonus/100))
         setWorld({ ...world })
     }
     function buyToScore(res: number): void {
@@ -74,6 +79,23 @@ function Main({ loadworld, username }: MainProps) {
                     world.angelbonus += cash.ratio
                 }
             }})
+        setWorld({ ...world })
+    }
+
+    function buyAngelUpgradeToScore(angelup: Pallier, res: number): void {
+        world.activeangels -= res
+        angelup.unlocked = true  
+        world.products.forEach(p => {
+                if (angelup.typeratio === "vitesse") {
+                    p.vitesse = p.vitesse / angelup.ratio
+                }
+                if (angelup.typeratio === "gain") {
+                    p.revenu = p.revenu * angelup.ratio
+                }
+                if (angelup.typeratio === "ange") {
+                    world.angelbonus += angelup.ratio
+                }
+            })
         setWorld({ ...world })
     }
 
@@ -187,6 +209,14 @@ function Main({ loadworld, username }: MainProps) {
         console.log(showUpgrade)
         setShowUpgrade(!showUpgrade)
     }
+
+    function showangels() {
+        setShowAngels(!showAngels)
+    }
+
+    function showangelsupgrade() {
+        setShowAngelsUpgrade(!showAngelsUpgrade)
+    }
     function affichagemanager(): JSX.Element {
         if (showManagers) {
 
@@ -231,6 +261,29 @@ function Main({ loadworld, username }: MainProps) {
             return (<div></div>)
         }
     }
+    function affichageangels(): JSX.Element {
+        if (showAngels) {
+
+            return (
+                <Anges  username={username} score={world.score}  world={world} showAngels={showangels}></Anges>
+            )
+        }
+        else {
+            return (<div></div>)
+        }
+    }
+
+    function affichageangelsupgrade(): JSX.Element {
+        if (showAngelsUpgrade) {
+console.log("test")
+            return (
+                <AngelsUpgrades  username={username} money={world.money} world={world} showAngelUpgrade={showangelsupgrade} buyAngelUpgradeToScore={buyAngelUpgradeToScore}></AngelsUpgrades>
+            )
+        }
+        else {
+            return (<div></div>)
+        }
+    }
 
     function snackbar(): JSX.Element {
         if (open) {
@@ -258,6 +311,8 @@ function Main({ loadworld, username }: MainProps) {
         </div>
         <div><Badge badgeContent={world.upgrades.filter(cash => !cash.unlocked && world.money > cash.seuil).length} color="primary"><button className="leboutonup" onClick={showupgrade}>Upgrades</button>{affichageupgrade()} </Badge>
         </div>
+        <div><button className="leboutonange" onClick={showangels}>Angels</button>{affichageangels()}</div>
+        <div><Badge badgeContent={world.angelupgrades.filter(ange => !ange.unlocked && world.activeangels > ange.seuil).length} color="primary"><button className="leboutonaup" onClick={showangelsupgrade}>Angels Upgrades</button>{affichageangelsupgrade()} </Badge></div>
         </div>
         <div className="lereste">
         <div className="presentation"><div ><img className="imagepres" src={"http://localhost:4000/" + world.logo} /> </div>
