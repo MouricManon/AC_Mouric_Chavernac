@@ -20,6 +20,7 @@ type ManagerProps = {
     }
 function Manager(this: any, { username, world, money, showManagers,buyManagerToScore} : ManagerProps){
     const[open, setOpen] = useState(false);
+    const[message, setMessage] = useState("");
     const [engagerManager] = useMutation(ENGAGER_MANAGER,
         { context: { headers: { "x-user": username }},
         onError: (error): void => {
@@ -41,7 +42,7 @@ function Manager(this: any, { username, world, money, showManagers,buyManagerToS
     <button className="embaucher" disabled={money < manager.seuil}>
     Hire !</button>
     <Snackbar
-        message={"Le manager "+manager.name +" a été embauché !"}
+        message={message}
         open={open}
         onClose={() => setOpen(false)}
         autoHideDuration={2000}
@@ -57,6 +58,7 @@ function hireManager(manager : Pallier){
     if(money >= manager.seuil){
         engagerManager({variables: {name: manager.name}})
         buyManagerToScore(manager,manager.seuil)
+        setMessage("Le manager "+manager.name +" a été embauché !")
         setOpen(true)
     }
 }

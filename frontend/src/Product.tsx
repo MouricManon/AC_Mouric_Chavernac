@@ -64,7 +64,7 @@ function ProductComponent(this: any, { username, product, onProductionDone, vale
                 </div>
                 <div className="ligne2"><span> {product.name} </span>
                     <span> Quantité : {Math.trunc(product.quantite)} </span>
-                    <div onClick={demandeachat} className="pasgrise"> Prix : { <span dangerouslySetInnerHTML={{ __html: transform(Math.round(calc() * 100) / 100) }}/>}
+                    <div onClick={demandeachat} className="pasgrise"> Prix : { <span dangerouslySetInnerHTML={{ __html: transform(Math.round(calc() * 100) / 100) }}/>}  {valeur==="*Max" && <span> pour {Math.trunc(iteration.current)}</span>}
                     </div>
                 </div>
             </div>)
@@ -142,9 +142,9 @@ function ProductComponent(this: any, { username, product, onProductionDone, vale
     }
 
     function calcMaxProduit(): number {
-        iteration.current = (Math.log10(-(money * (1 - product.croissance) / product.cout - 1)) / Math.log10(product.croissance)) - 1
+        iteration.current = (Math.log10(-(money * (1 - product.croissance) / product.cout - 1)) / Math.log10(product.croissance))
         console.log(Math.trunc(iteration.current))
-        return iteration.current
+        return Math.trunc(iteration.current)
     }
     function calc(): number {
         if (valeur === "*1") {
@@ -160,7 +160,7 @@ function ProductComponent(this: any, { username, product, onProductionDone, vale
             return res.current
         }
         if (valeur === "*Max") {
-            res.current = product.cout * (1 - product.croissance ** (calcMaxProduit()+1)) / (1 - product.croissance)
+            res.current = product.cout * (1 - product.croissance ** (calcMaxProduit())) / (1 - product.croissance)
             return res.current
         }
 
@@ -203,7 +203,7 @@ function ProductComponent(this: any, { username, product, onProductionDone, vale
     function grise(): boolean {
         //TODO plusieurs paliers d'un coup
 
-        if (res.current <= money && money>0) {
+        if (res.current <= money && money>0 && res.current >0 ) {
             griseval.current = true
             return griseval.current
         }

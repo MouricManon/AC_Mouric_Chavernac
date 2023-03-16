@@ -1,19 +1,19 @@
 .modale3 {
-    position: fixed;
+    position: absolute;
     /* reste en place */
     z-index: 2;
     /* au dessus du reste */
     width: 80vw;
     /* largeur */
-    height: 40vw;
+    height: 42vw;
     /* hauteur */
     /* barre de scroll si besoin */
     background-color: #9b9b9bd7;
     /* opaque */
     border: solid;
-    top: 5;
+    top: 11%;
     /* a 10% du haut */
-    left: 10%;
+    left: 50%;
     overflow: scroll;
 }
 
@@ -26,10 +26,12 @@
 }
 
 .angeimage {
-    width: 20vw;
-    height: 20vw;
+    width: 30vw;
+    height: 30vw;
     border-radius: 5%;
     margin-top: 1vw;
+    top: -5%;
+    right: 5%;
     position: relative;
 }
 
@@ -44,11 +46,12 @@
 .reset {
     border-radius: 10%;
     position: absolute;
-    width: 8vw;
-    height: 4vw;
-    right: 10%;
-    top: 10%;
-    background-color: #a5d898;
+    width: 16vw;
+    height: 6vw;
+    right: 5%;
+    top: 42%;
+    font-size: 1.8em;
+    background-color: rgb(132, 26, 194);
     color: black;
     font-family: 'Roboto', sans-serif;
 }
@@ -56,24 +59,30 @@
 .reset:disabled {
     border-radius: 10%;
     position: absolute;
-    width: 8vw;
-    height: 4vw;
-    right: 10%;
-    top: 10%;
-    background-color: #d89898;
+    width: 16vw;
+    height: 6vw;
+    right: 5%;
+    font-size: 1.8em;
+    top: 42%;
+    background-color: #fa8729;
     color: black;
     font-family: 'Roboto', sans-serif;
 }
 
 .nbAngesActifs {
     position: absolute;
-    font-size: 2em;
+    font-size: 1.8em;
     font-family: 'Roboto', sans-serif;
+    top: 23vw;
+    left: 33%;
+    color: black;
 }
 
 .nbAngesrecoltes {
     position: absolute;
-    font-size: 2em;
+    font-size: 1.8em;
+    top: 15vw;
     font-family: 'Roboto', sans-serif;
-    right: 2%;
+    right: 33%;
+    color: black;
 }

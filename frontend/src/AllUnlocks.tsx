@@ -14,8 +14,10 @@ function AllUnlocks(this: any, { world, money, showAllUnlocks}: AllUnlockProps) 
     <div className="allallunlocks">{world.allunlocks.filter( p => !p.unlocked).map(p =><div className="anallunlock" key={p.idcible}>
     <img alt="allunlock logo" className="allunlockimage" src={"http://localhost:4000/"+ p.logo }/> 
     <div className="nameau"> { p.name} </div>
+    <div className="qteeteffet1">
     <div className="quantite"> Quantité nécessaire : { p.seuil} </div> 
-  </div>)} </div>
+    <div className="effet1">{p.typeratio} X {p.ratio}</div></div> </div>
+)} </div> 
     <img onClick={fermerallunlock} src={"http://localhost:4000/icones/croix.png"} className="laCroix"/>
 </div>
 )

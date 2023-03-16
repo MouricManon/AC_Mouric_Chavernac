@@ -20,6 +20,7 @@ type AngelUpgradeProps = {
     }
 function AngelsUpgrades(this: any, { username, world, money, showAngelUpgrade,buyAngelUpgradeToScore} : AngelUpgradeProps){
     const[open, setOpen] = useState(false);
+    const[message, setMessage] = useState("");
     const [buyupgrade] = useMutation(ANGELUPGRADE,
         { context: { headers: { "x-user": username }},
         onError: (error): void => {
@@ -32,13 +33,14 @@ function AngelsUpgrades(this: any, { username, world, money, showAngelUpgrade,bu
     <div className="allangelsu">{world.angelupgrades.filter( ange => !ange.unlocked).map(ange =><div className="anangelu" key={ange.idcible}>
     <img alt="upgrade angel image" className="angeluimage" src={"http://localhost:4000/"+ ange.logo }/> 
     <div className="name2"> { ange.name} </div>
+    <div className="couteteffect1">
     <div className="angelcost"> Prix :{ <span dangerouslySetInnerHTML={{ __html: transform(Math.round(ange.seuil * 100) / 100) }}/>} anges  </div> 
-   
+    <div className="effect1">{ange.typeratio} X {ange.ratio}</div> </div>
     <div  >  
     <button onClick= {()=>takeAngelUpgrade(ange)} className="angeltake" disabled={world.activeangels < ange.seuil}>
     Buy !</button>
     <Snackbar
-        message={"L'amélioration "+ange.name +" a été achetée !"}
+        message={message}
         open={open}
         onClose={() => setOpen(false)}
         autoHideDuration={2000}
@@ -53,6 +55,7 @@ function fermerAngelupgrade(){
 function takeAngelUpgrade(ange : Pallier){
     if(world.activeangels >= ange.seuil){
         setOpen(true)
+        setMessage("L'amélioration "+ange.name +" a été achetée !")
         buyupgrade({variables: {name: ange.name}})
         buyAngelUpgradeToScore(ange,ange.seuil)
     }

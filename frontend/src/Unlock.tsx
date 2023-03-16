@@ -17,8 +17,10 @@ function Unlock(this: any, { world, money, showUnlocks}: UnlockProps) {
     <div className="nameu"> { p.name} </div>
     <div className="productu"> {nomProduitOfUnlock(p)}</div>
     </div>
+    <div className="qteeteffet">
     <div className="qte"> Quantité nécessaire : { p.seuil} </div> 
-  </div>)} </div>
+  </div>
+  <div className="effet">{p.typeratio} X {p.ratio}</div></div>)} </div>
     <img onClick={fermerunlock} src={"http://localhost:4000/icones/croix.png"} className="laCroix"/>
 </div>
 )

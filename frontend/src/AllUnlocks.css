@@ -1,19 +1,19 @@
 .modul {
-    position: fixed;
+    position: absolute;
     /* reste en place */
     z-index: 2;
     /* au dessus du reste */
     width: 80vw;
     /* largeur */
-    height: 40vw;
+    height: 42vw;
     /* hauteur */
     /* barre de scroll si besoin */
     background-color: #9b9b9bd7;
     /* opaque */
     border: solid;
-    top: 5;
     /* a 10% du haut */
-    left: 10%;
+    left: 50%;
+    top: 10%;
     overflow: scroll;
     /* a 20% de la gauche */
 }
@@ -74,7 +74,24 @@
 .quantite {
     width: 17vw;
     position: relative;
-    left: 5%;
+    left: 15%;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.quantiteeteffet1 {
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    width: 9vw;
+    left: 4%;
+}
+
+.effet1 {
+    width: 17vw;
+    position: relative;
+    left: 35%;
     font-style: italic;
     font-weight: bold;
 }

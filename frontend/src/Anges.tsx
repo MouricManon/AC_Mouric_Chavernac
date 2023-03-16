@@ -4,6 +4,7 @@ import { World, Pallier } from './world'
 import { Snackbar } from '@material-ui/core';
 import { gql, useMutation } from '@apollo/client';
 import { transform } from "./utils";
+import { useInterval } from './MyInterval';
 
 const RESETWORLD = gql`
 mutation ResetWorld{
@@ -20,7 +21,7 @@ type AngesProps = {
 function Anges(this: any, { username, world, score, showAngels }: AngesProps) {
     const [ajout, setAjout] = useState(0);
     const [dis, setDis] = useState(true);
-    useEffect(() => {calcAnges()}, [score])
+    useInterval(()=>calcAnges(),1000)
     const [reset] = useMutation(RESETWORLD,
         {
             context: { headers: { "x-user": username } },
@@ -43,14 +44,13 @@ function Anges(this: any, { username, world, score, showAngels }: AngesProps) {
         showAngels()
     }
 
-    function calcAnges(): number {
+    function calcAnges(){
         setAjout(150 * Math.sqrt(score / Math.pow(10, 15)) - world.totalangels)
         if (ajout > 0) {
             setDis(false)
         } else {
-            setDis(false)
+            setDis(true)
         }
-        return ajout
     }
 
     async function collecteanges() { 

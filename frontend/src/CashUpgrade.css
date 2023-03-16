@@ -1,19 +1,19 @@
 .modale {
-    position: fixed;
+    position: absolute;
     /* reste en place */
     z-index: 2;
     /* au dessus du reste */
     width: 80vw;
     /* largeur */
-    height: 40vw;
+    height: 42vw;
     /* hauteur */
     /* barre de scroll si besoin */
     background-color: #9b9b9bd7;
     /* opaque */
     border: solid;
-    top: 5;
     /* a 10% du haut */
-    left: 10%;
+    left: 50%;
+    top: -236%;
     overflow: scroll;
 }
 
