@@ -69,7 +69,7 @@ module.exports = {
                 "unlocked": false
             }, {
                 "name": "Changement de la courroie",
-                "logo": "icones/Courroie.jpg",
+                "logo": "icones/Courroie.png",
                 "seuil": 40,
                 "idcible": 2,
                 "ratio": 2,
