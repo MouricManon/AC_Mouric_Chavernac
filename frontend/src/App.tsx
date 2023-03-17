@@ -76,18 +76,20 @@ query GetWorld {
 }`
 
 function App() {
-  const [username, setUsername] = useState("Pilote750")
+  const [username, setUsername] = useState(localStorage.getItem('username') || `Pilote${Math.floor(Math.random()*1000)}`);
   const client = useApolloClient();
-
+  const onUserNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    localStorage.setItem("username", event.currentTarget.value);
+    setUsername(event.currentTarget.value);
+    //Quand le nom d'utilisateur change --> forcer le client à refabriquer la requête.
+    client.resetStore();
+};
 
   const { loading, error, data, refetch } = useQuery(GET_WORLD, {
     context: { headers: { "x-user": username } }
   });
 
-  useEffect(() => {
-    let pseudo = pseudodefault();
-    setUsername(pseudo)
-  }, [])
+
 
   let corps = undefined
   if (loading) corps = <div> Loading... </div>
@@ -104,21 +106,6 @@ function App() {
    
   )
   
-  function onUserNameChanged(username: ChangeEvent<HTMLInputElement>) {
-    setUsername(username.target.value)
-    localStorage.setItem("pseudo", username.target.value);
-    console.log(username.target.value)
-    client.resetStore()
-  }
-  
-  function pseudodefault(): string {
-    let pseudo = localStorage.getItem("pseudo")
-    if (pseudo == null) {
-      pseudo = "Pilote" + Math.floor(Math.random() * 1000)
-      localStorage.setItem("pseudo", pseudo);
-      client.resetStore()
-    }
-    return pseudo
-  }
+
 }
 export default App;
