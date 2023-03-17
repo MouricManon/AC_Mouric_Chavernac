@@ -26,12 +26,12 @@
 }
 
 .angeimage {
-    width: 30vw;
-    height: 30vw;
+    width: 20vw;
+    height: 20vw;
     border-radius: 5%;
     margin-top: 1vw;
-    top: -5%;
-    right: 5%;
+    top: 12%;
+    right: -1%;
     position: relative;
 }
 
@@ -51,7 +51,7 @@
     right: 5%;
     top: 42%;
     font-size: 1.8em;
-    background-color: rgb(132, 26, 194);
+    background-color: #fab01b;
     color: black;
     font-family: 'Roboto', sans-serif;
 }
