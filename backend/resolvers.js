@@ -173,7 +173,7 @@ module.exports = {
         acheterCashUpgrade(parent, args, context) {
             calculerRevenue(context)
             let upgrade = context.world.upgrades.find(u => u.name === args.name)
-            upgrade.unlocked !== upgrade.unlocked
+            upgrade.unlocked != upgrade.unlocked
             let produit = context.world.products.find(p => p.id === upgrade.idcible)
             switch (upgrade.typeratio) {
                 case "vitesse":
