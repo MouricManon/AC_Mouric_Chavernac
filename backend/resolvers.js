@@ -14,7 +14,7 @@ function saveWorld(context) {
 
 function calculerRevenue(context) {
     let scoreTemp = context.world.money
-    //calcule le temps écoulé depuis la dernière sauvegarde
+        //calcule le temps écoulé depuis la dernière sauvegarde
     let now = Date.now()
     let elapsed = now - context.world.lastupdate
     context.world.products.forEach(p => {
@@ -25,7 +25,7 @@ function calculerRevenue(context) {
             if (p.timeleft > 0 && p.timeleft < elapsed) {
                 //console.log("Le produit ", p.name, " a réussi à créer un exemplaire")
                 p.timeleft = 0
-                //j'ajoute l'argent
+                    //j'ajoute l'argent
                 context.world.money += p.revenu * p.quantite * (1 + context.world.activeangels * context.world.angelbonus / 100)
             } else {
                 //le temps écoulé n'est pas assez grand pour finir la production, on met à jour le temps restant
@@ -50,23 +50,23 @@ function calculerRevenue(context) {
 function unlockSeuil(context, args) {
     let produit = context.world.products.find(p => p.id === args.id)
     produit.paliers.forEach(p => {
-        if ((!p.unlocked) && (produit.quantite + args.quantite >= p.seuil)) {
-            p.unlocked != p.unlocked
-            switch (p.typeratio) {
-                case "vitesse":
-                    produit.vitesse /= p.ratio
-                    break
-                case "gain":
-                    produit.revenu *= p.ratio
-                    break
-                case "ange":
-                    context.world.angelbonus += p.ratio
-                    break
+            if ((!p.unlocked) && (produit.quantite + args.quantite >= p.seuil)) {
+                p.unlocked != p.unlocked
+                switch (p.typeratio) {
+                    case "vitesse":
+                        produit.vitesse /= p.ratio
+                        break
+                    case "gain":
+                        produit.revenu *= p.ratio
+                        break
+                    case "ange":
+                        context.world.angelbonus += p.ratio
+                        break
+                }
             }
-        }
-    })
-    //les paliers commun à tous les produits
-    //Je parcours tous les paliers et pour chaque je récupère le seuil et parcoure tous les produits sauf celui en amélioration, et j'utilise un drapeau
+        })
+        //les paliers commun à tous les produits
+        //Je parcours tous les paliers et pour chaque je récupère le seuil et parcoure tous les produits sauf celui en amélioration, et j'utilise un drapeau
     let drap = true
     context.world.allunlocks.forEach(p => {
         if ((!p.unlocked) && (drap)) {
@@ -79,22 +79,22 @@ function unlockSeuil(context, args) {
             })
             if ((drap) && (produit.quantite + args.quantite >= p.seuil)) {
                 p.unlocked = true
-                //Le bonus est appliqué à tous les produits
+                    //Le bonus est appliqué à tous les produits
                 if (p.idcible === 0) {
                     context.world.products.forEach(prod => {
-                        switch (p.typeratio) {
-                            case "vitesse":
-                                prod.vitesse /= p.ratio
-                                break
-                            case "gain":
-                                prod.revenu *= p.ratio
-                                break
-                            case "ange":
-                                context.world.angelbonus += p.ratio
-                                break
-                        }
-                    })
-                    //Le bonus est appliqué à un seul produit
+                            switch (p.typeratio) {
+                                case "vitesse":
+                                    prod.vitesse /= p.ratio
+                                    break
+                                case "gain":
+                                    prod.revenu *= p.ratio
+                                    break
+                                case "ange":
+                                    context.world.angelbonus += p.ratio
+                                    break
+                            }
+                        })
+                        //Le bonus est appliqué à un seul produit
                 } else {
                     let produitUnlock = context.world.products.find(produit => produit.id === p.idcible)
                     switch (p.typeratio) {
@@ -111,8 +111,7 @@ function unlockSeuil(context, args) {
                 }
             }
         }
-    }
-    )
+    })
 }
 
 module.exports = {
@@ -173,7 +172,10 @@ module.exports = {
         acheterCashUpgrade(parent, args, context) {
             calculerRevenue(context)
             let upgrade = context.world.upgrades.find(u => u.name === args.name)
-            upgrade.unlocked != upgrade.unlocked
+            console.log("Le statut de l'upgrade avant est " + upgrade.unlocked)
+            upgrade.unlocked = true
+            context.world.money -= upgrade.seuil
+            saveWorld(context)
             let produit = context.world.products.find(p => p.id === upgrade.idcible)
             switch (upgrade.typeratio) {
                 case "vitesse":
